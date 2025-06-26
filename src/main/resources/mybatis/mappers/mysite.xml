@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mysite">
+<!-- 쿼리문작성 -->
+	<!-- 방명록 전체 가져오기 -->
+	<select id="selectList" resultType="com.javaex.vo.UserVO">
+		<![CDATA[
+			select no,
+			    id,
+			    password,
+			    name,
+			    gender
+			from users
+			order by reg_date desc
+		]]>
+	</select>
+	
+	<!-- 방명록 저장 -->
+	<insert id="insert" parameterType="com.javaex.vo.UserVO">
+		<![CDATA[
+			insert into users
+			values (null,#{id},#{password},#{name},#{gender});
+		]]>
+	</insert>
+	
+	<!-- 방명록 삭제 -->
+	<delete id="delete" parameterType="com.javaex.vo.UserVO">
+		<![CDATA[
+			delete from users
+			where no = #{no}
+			and password = #{password}
+		]]>
+	</delete>
+	
+	
+</mapper>
