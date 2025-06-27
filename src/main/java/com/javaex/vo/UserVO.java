@@ -12,7 +12,6 @@ public class UserVO {
 	public UserVO() {}
 	
 	public UserVO(String id, String password, String name, String gender) {
-		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
