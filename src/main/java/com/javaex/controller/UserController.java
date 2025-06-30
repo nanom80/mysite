@@ -11,6 +11,7 @@ import com.javaex.service.UserService;
 import com.javaex.vo.GuestbookVO;
 import com.javaex.vo.UserVO;
 
+import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -100,12 +101,78 @@ public class UserController {
 	//방명록작성
 	//http://localhost:8888/guestbook/addlistWrite?id=111&name=111&password=111&content=111
 	@RequestMapping(value="/guestbook/addlistWrite", method= {RequestMethod.GET, RequestMethod.POST})
-	public String addlistWrite(@ModelAttribute GuestbookVO guestbookVO) {
+	public String addlistWrite(@ModelAttribute GuestbookVO guestbookVO, HttpSession session) {
+		
+		// 로그인한 사용자 정보 가져오기
+	    UserVO authUser = (UserVO) session.getAttribute("authUser");
+	    
+	    // 방명록에 로그인 ID 저장
+	    if (authUser != null) {
+	        guestbookVO.setId(authUser.getId());
+	    }
+		
 		int count = userService.exeGuestbookWrite(guestbookVO);
 		
 		System.out.println(count);
 		
 		return "redirect:/guestbook/addlist";
+	}
+	
+	//회원정보 수정폼
+	@RequestMapping(value = "/user/editform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String editForm(HttpSession session, Model model) {
+		System.out.println("UserController.editForm()");
+		
+	    UserVO authUser = (UserVO)session.getAttribute("authUser");
+	    System.out.println(authUser);
+
+	    // 로그인 확인
+	    if (authUser == null) {
+	        return "redirect:/user/loginform";
+	    }
+
+	    int no = authUser.getNo();
+
+	    // 회원정보 가져오기
+	    UserVO userVO = userService.exeEditForm(no);
+	    
+	    System.out.println("userVO = " + userVO);
+
+	    // 모델에 담기
+	    model.addAttribute("userVO", userVO);
+
+	    return "user/editForm";
+	}
+	
+	//회원정보 수정
+	@RequestMapping(value = "/user/edit", method = { RequestMethod.GET, RequestMethod.POST })
+	public String edit(@ModelAttribute UserVO userVO, HttpSession session) {
+		System.out.println("UserController.edit()");
+		
+		//0.DS가 파라미터 값을 묶어서 준다
+		System.out.println(userVO);
+		
+		//1.세션에서 no값을 꺼내온다
+		UserVO authUser = (UserVO)session.getAttribute("authUser");
+		int no = authUser.getNo();
+		System.out.println(no);
+		
+		//2.DS가 묶어준 userVO에 세선에서 꺼낸 no를 추가한다
+		userVO.setNo(no);
+		System.out.println(userVO);
+		
+		//3.서비스에 묶어둔 userVO를 넘긴다
+		userService.exeEdit(userVO);
+		
+		//4.헤더의 이름 변경 -> 세션의 이름 변경
+		//1번에서 가져온 authUser의 비밀번호,이름,성별을 변경한다
+		authUser.setPassword(userVO.getPassword());
+		authUser.setName(userVO.getName());
+		authUser.setGender(userVO.getGender());
+		
+		
+		
+		return "redirect:/";
 	}
 	
 }

@@ -48,5 +48,27 @@ public class UserRepository {
 		return count;
 	}
 	
+	//user정보가져오기(no) 회원수정폼
+	public UserVO userSelectByNo(int no) {
+		System.out.println("UserRepository.selectOneByNo()");
+		
+		UserVO userVO = sqlSession.selectOne("mysite.selectOneByNo", no);
+		
+		return userVO;
+		
+	}
+	
+	//회원수정
+	public int userUpdate(UserVO userVO) {
+		System.out.println("UserRepository.userUpdate()");
+		
+		System.out.println(userVO);
+		
+		int count = sqlSession.update("mysite.update", userVO);
+		System.out.println(count);
+		
+		return 0;
+	}
+	
 	
 }

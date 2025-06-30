@@ -6,6 +6,7 @@
 	<select id="select" resultType="com.javaex.vo.UserVO">
 		<![CDATA[
 			select no,
+				id,
 			    name
 			from users
 			where id = #{id}
@@ -37,5 +38,41 @@
 			values (null,#{id},#{name},#{password},#{content});
 		]]>
 	</insert>
+	
+	<!-- user정보 가져오기(세션용) -->
+	<select id="selectOneByPw" resultType="com.javaex.vo.UserVO">
+		<![CDATA[
+			select no,
+				name
+			from users
+			where id = #{id}
+			and password = #{password}
+		]]>
+	</select>
+	
+	<!-- user정보 가져오기(회원수정폼) -->
+	<select id="selectOneByNo" parameterType="int" resultType="com.javaex.vo.UserVO">
+		<![CDATA[
+			select no,
+				id,
+				password,
+				name,
+				gender
+			from users
+			where no = #{no}
+		]]>
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="update" parameterType="com.javaex.vo.UserVO">
+		<![CDATA[
+			update users
+			set id = #{id},
+			    password = #{password},
+			    name = #{name},
+			    gender = #{gender}
+			where no = #{no}
+		]]>
+	</update>
 	
 </mapper>
