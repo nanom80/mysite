@@ -35,6 +35,9 @@ public class UserController {
 	
 	//회원가입
 	//http://localhost:8888/user/join?id=111&password=111&name=유재석&gender=남
+	//@ModelAttribute UserVO userVO -> 클라이언트의 요청 파라미터를 UserVO 객체로 자동 바인딩
+	//@ModelAttribute : 폼 입력값 → 자바 객체로 자동 변환
+	//즉 @ModelAttribute UserVO userVO : form 데이터 → 객체로 자동 바인딩 (회원가입, 로그인)
 	@RequestMapping(value="user/join", method= {RequestMethod.GET, RequestMethod.POST})
 	public String join(@ModelAttribute UserVO userVO) {
 		System.out.println("UserController.join()");

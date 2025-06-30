@@ -20,7 +20,7 @@ public class UserRepository {
 	//입력
 	public int userInsert(UserVO userVO) {
 		
-		System.out.println("UserDAO.userInsert()");
+		System.out.println("UserRepository.userInsert()");
 		
 		int count = sqlSession.insert("mysite.insert", userVO);
 		
@@ -30,7 +30,7 @@ public class UserRepository {
 	//조회
 	public UserVO userSelectOneByIdPw(UserVO userVO) {
 		
-		System.out.println("UserDAO.userSelectOneByIdPw()");
+		System.out.println("UserRepository.userSelectOneByIdPw()");
 		System.out.println(userVO);
 		
 		UserVO authUser = sqlSession.selectOne("mysite.select", userVO);
@@ -40,7 +40,7 @@ public class UserRepository {
 	
 	//방명록쓰기
 	public int userGuestbookWrite(GuestbookVO guestbookVO) {
-		System.out.println("UserDAO.userGuestbookWrite()");
+		System.out.println("UserRepository.userGuestbookWrite()");
 		System.out.println(guestbookVO);
 		
 		int count = sqlSession.insert("mysite.insertGuestbook", guestbookVO);
