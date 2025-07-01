@@ -32,7 +32,7 @@ create table users(
 
 ALTER TABLE users ADD CONSTRAINT uq_users_id UNIQUE (id);
 
-insert into users values(null,'111','111','유재석','남');
+insert into users values(null,'112','111','유재석','남');
 insert into users values(null,'222','222','이효리','여');
 insert into users values(null,'333','333','강호동','남');
 
@@ -72,7 +72,9 @@ create table board(
 drop table board;
 truncate table board;
 
+select * from users;
 
+delete from users where no = 17;
 
 insert into board values (20,1,'안녕하세요','반갑습니다',0,now());
 
@@ -88,10 +90,18 @@ select a.no,
     b.name userName
 from board a, users b
 where a.user_no = b.no
+-- limit 0, 10
+limit 10, 10
 ;
 
 
+
+
 select * from users;
+
+update board set user_no = 1 where user_no = 12;
+
+select * from board;
 
 delete from board where no = 12;
 
@@ -99,14 +109,11 @@ delete from board where no = 12;
 
 
 
-
-
+select * from users;
 
 commit;
 
-select * from users;
-
-update users set gender='male' where no=1;
+update users set gender='male', id='123', password='123',name='123' where no=11;
 
 desc users;
 

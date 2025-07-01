@@ -1,12 +1,14 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVO;
@@ -23,10 +25,12 @@ public class BoardController {
 	//메소드gs
 	
 	//메소드일반
+	
+	//게시판 전체 리스트
 	//Model model : 자바 객체 → JSP로 전달 (리스트 출력, 상세보기 등)
 	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String list(Model model) {
-		System.out.println("BoardController.list()");
+		System.out.println("<BoardController.list>");
 		
 		List<BoardVO> boardList = boardService.exeList();
 		
@@ -38,5 +42,23 @@ public class BoardController {
 		
 		return "board/list";
 	}
+	
+	//게시판 전체 리스트2(페이징)
+	@RequestMapping(value="/list2", method= {RequestMethod.GET, RequestMethod.POST})
+	public String list2(@RequestParam(value="crtPage", required = false, defaultValue = "1") int crtPage, Model model) {
+		                                           //, required = false, defaultValue = "1" 파라미터 없이 http://localhost:8888/board/list2 주소로 접속 가능
+	//public String list2(@RequestParam("crtPage") int crtPage, Model model) { //'value=' 삭제 가능
+		System.out.println("<BoardController.list2>");
+		
+		Map<String, Object> pMap = boardService.exeList2(crtPage);
+		
+		System.out.println("<BoardController.list2> "+pMap);
+		
+		model.addAttribute("pMap", pMap);
+		
+		return "board/list2";
+		
+	}
+	
 
 }
