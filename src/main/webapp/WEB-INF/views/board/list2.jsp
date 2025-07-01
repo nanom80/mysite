@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 
@@ -97,8 +98,8 @@
 								           step="1"
 								           var="page">
 								    <c:choose>
-								    	<c:when test="${param.crtpage == page}">
-								    		<li><a class="active" href="${pageContext.request.contextPath}/board/list2?crtPage=${page}">${page}</a></li>
+								    	<c:when test="${param.crtPage == page}">
+								    		<li class="active"><a href="${pageContext.request.contextPath}/board/list2?crtPage=${page}">${page}</a></li>
 								    	</c:when>
 								    	<c:otherwise>
 								    		<li><a href="${pageContext.request.contextPath}/board/list2?crtPage=${page}">${page}</a></li>
