@@ -35,11 +35,44 @@
 		]]>
 	</select>
 	
-	<!-- 전체 글 갯수 -->
+	<!-- 게시판 리스트(페이징+검색) -->
+	<select id="selectList3" parameterType="map" resultType="com.javaex.vo.BoardVO">
+		<![CDATA[
+			select a.no,
+			    a.title,
+			    a.content,
+			    a.hit,
+			    date_format(a.reg_date,"%Y-%m-%d") regDate,
+			    b.no userNo,
+			    b.name userName
+			from board a, users b
+			where a.user_no = b.no
+		]]>
+		<if test="kwd != null">
+		<![CDATA[
+			and a.title like concat('%',#{kwd},'%')
+		]]>
+		</if>
+		<![CDATA[
+			order by a.no
+			limit #{startRowNo}, #{listCnt}
+		]]>
+	</select>
+	
+	<!-- 전체 글 갯수(페이징) -->
 	<select id="selectTotalCount" resultType="int">
 		<![CDATA[
 			select count(*) totalCount
 			from board
+		]]>
+	</select>
+	
+	<!-- 전체 글 갯수(페이징+검색) -->
+	<select id="selectTotalCountByKwd" resultType="int">
+		<![CDATA[
+			select count(*) totalCount
+			from board
+			where title like concat('%',#{kwd},'%')
 		]]>
 	</select>
 </mapper>

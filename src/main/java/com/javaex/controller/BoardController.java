@@ -44,10 +44,11 @@ public class BoardController {
 	}
 	
 	//게시판 전체 리스트2(페이징)
+	//@RequestParam("crtPage") > 'value=' 삭제 가능
+	//required = false, defaultValue = "1" > 파라미터 없이 http://localhost:8888/board/list2 주소로 접속 가능
 	@RequestMapping(value="/list2", method= {RequestMethod.GET, RequestMethod.POST})
 	public String list2(@RequestParam(value="crtPage", required = false, defaultValue = "1") int crtPage, Model model) {
-		                                           //, required = false, defaultValue = "1" 파라미터 없이 http://localhost:8888/board/list2 주소로 접속 가능
-	//public String list2(@RequestParam("crtPage") int crtPage, Model model) { //'value=' 삭제 가능
+		
 		System.out.println("<BoardController.list2>");
 		
 		Map<String, Object> pMap = boardService.exeList2(crtPage);
@@ -57,6 +58,31 @@ public class BoardController {
 		model.addAttribute("pMap", pMap);
 		
 		return "board/list2";
+		
+	}
+	
+	//게시판 전체 리스트3(페이징)
+	//@RequestParam("crtPage") > 'value=' 삭제 가능
+	//required = false, defaultValue = "1" > 파라미터 없이 http://localhost:8888/board/list2 주소로 접속 가능
+	@RequestMapping(value="/list3", method= {RequestMethod.GET, RequestMethod.POST})
+	public String list3(@RequestParam(value="crtPage", required = false, defaultValue = "1") int crtPage,
+			            @RequestParam(value="kwd", required = false, defaultValue = "") String kwd,
+			            Model model) {
+		
+		System.out.println("<BoardController.list3>");
+		System.out.println("<BoardController.list3> currentPage: "+crtPage+" kwd: "+kwd);
+		
+		Map<String, Object> pMap = boardService.exeList3(crtPage, kwd);
+		System.out.println("<BoardController.list3> "+pMap);
+		
+		/*
+		for (BoardVO board : boardList) {
+		    System.out.println(board);
+		}
+		*/
+		model.addAttribute("pMap", pMap);
+		
+		return "board/list3";
 		
 	}
 	

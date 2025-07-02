@@ -28,11 +28,13 @@ http://localhost:8888/user/editform
 수정
 http://localhost:8888/user/edit?name=111&password=111&content=111
 
-방명록
+게시판
 http://localhost:8888/board/list
-
 http://localhost:8888/board/list2?crtPage=2
 
+게시판 검색
+http://localhost:8888/board/list3?kwd=12
+http://localhost:8888/board/list2?crtPage=2&kwd=12
 
 
 

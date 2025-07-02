@@ -90,9 +90,16 @@ select a.no,
     b.name userName
 from board a, users b
 where a.user_no = b.no
+order by a.no
 -- limit 0, 10
-limit 10, 10
+limit 0, 10
 ;
+
+select count(*) cnt
+from board
+;
+
+
 
 
 
