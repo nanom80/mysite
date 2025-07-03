@@ -7,6 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
+	/*
+	 * 1.기본(스프링, jsp, mybatis) : 메인, 회원가입폼, 회원가입, 로그인폼, 방명록
+	 * 2.세션 : 로그인, 로그아웃, 회원수정폼, 회원수정, 게시판
+	 * 3.세션 : 리스트페이징+검색
+	 * 4.js
+	 * 
+	 */
+	
 	//필드
 	
 	//생성자
