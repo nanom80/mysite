@@ -7,9 +7,15 @@
     <head>
         <meta charset="UTF-8">
         <title>MySite</title>
+        
+        <!-- css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mysite.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user.css">
+        
+        <!-- js -->
+		<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-3.7.1.js"></script>
+		
     </head>
     
     <body>
@@ -22,9 +28,9 @@
             <nav>
                 <ul class="clearfix">
                     <li><a href="">입사지원서</a></li>
-                    <li><a href="">게시판</a></li>
+                    <li><a href="${pageContext.request.contextPath}/board/list3">게시판</a></li>
                     <li><a href="">갤러리</a></li>
-                    <li><a href="">방명록</a></li>
+                    <li><a href="${pageContext.request.contextPath}/guestbook/addlist">방명록</a></li>
                 </ul>
             </nav>
             
@@ -53,7 +59,9 @@
                             <div class="info-row">
                                 <label class="info-title" for="txt-idcheck">아이디</label>
                                 <input id="txt-idcheck" type="text" name="id" value="">
-                                <button id="" class="btn btn-gray btn-input" type="button">중복체크</button>
+                                <button id="btnCheck" class="btn btn-gray btn-input" type="button">중복체크</button>
+                                <!-- 중복체크는 jquery(또는 js)로 처리한다 -->
+                                <p id="checkMsg" align='center'></p>
                             </div>
                             <div class="info-row">
                                 <label class="info-title" for="txt-pwd">패스워드</label>
@@ -89,5 +97,58 @@
             <!-- footer -->
             
         </div>
+
+<!--  ------------------------------------------------------------------------------------------------------------>
+<script>
+$(document).ready(function(){
+	console.log('돔트리 완성');
+	
+	//아이디체크 버튼을 클릭했을 때
+	console.log($('#btnCheck'));
+	$('#btnCheck').on('click', function(){
+		console.log('아이디체크 버튼 클릭');
+		
+		//입력한 id
+		let id = $('#txt-idcheck').val();
+		console.log(id);
+		
+		//서버와 통신
+		$.ajax({
+			//전송
+			url : "${pageContext.request.contextPath}/user/idcheck",
+			type : "post",
+			//contentType : "application/json",
+			data : {id: id}, //?id=id 를 주소창에 붙여줌
+			
+			//응답
+			dataType : "json",
+			success : function(result){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(result);
+				console.log(result.isUse);
+				
+				if(result.isUse == true){
+					$('#checkMsg').html('<strong>사용할 수 있는 아이디입니다</strong>');
+					$('#checkMsg').css('color','#0000ff');
+					$('#checkMsg').css('font-weight','bold');
+				}else {
+					$('#checkMsg').html('<strong>이미 사용중인 아이디입니다</strong>');
+					$('#checkMsg').css('color','#ff0000');
+					$('#checkMsg').css('font-weight','bold');
+				}
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		
+	});
+	
+});
+
+
+</script>
+
     </body>
 </html>

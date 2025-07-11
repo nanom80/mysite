@@ -63,7 +63,7 @@ public class BoardController {
 	
 	//게시판 전체 리스트3(페이징)
 	//@RequestParam("crtPage") > 'value=' 삭제 가능
-	//required = false, defaultValue = "1" > 파라미터 없이 http://localhost:8888/board/list2 주소로 접속 가능
+	//required = false, defaultValue = "1" > 파라미터 없이 http://localhost:8888/board/list3 주소로 접속 가능
 	@RequestMapping(value="/list3", method= {RequestMethod.GET, RequestMethod.POST})
 	public String list3(@RequestParam(value="crtPage", required = false, defaultValue = "1") int crtPage,
 			            @RequestParam(value="kwd", required = false, defaultValue = "") String kwd,
@@ -85,6 +85,8 @@ public class BoardController {
 		return "board/list3";
 		
 	}
+	
+	
 	
 
 }

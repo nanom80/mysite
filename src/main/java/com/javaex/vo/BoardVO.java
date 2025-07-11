@@ -1,6 +1,7 @@
 package com.javaex.vo;
 
 public class BoardVO {
+
 	//필드
 	private int no;
 	private String title;
@@ -12,7 +13,7 @@ public class BoardVO {
 	
 	//생성자
 	public BoardVO() {}
-
+	
 	public BoardVO(int no, String title, String content, int hit, String regDate, int userNo, String userName) {
 		this.no = no;
 		this.title = title;
@@ -23,6 +24,7 @@ public class BoardVO {
 		this.userName = userName;
 	}
 
+	//메소드gs
 	public int getNo() {
 		return no;
 	}
@@ -79,10 +81,12 @@ public class BoardVO {
 		this.userName = userName;
 	}
 
+	//메소드일반
 	@Override
 	public String toString() {
 		return "BoardVO [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regDate="
 				+ regDate + ", userNo=" + userNo + ", userName=" + userName + "]";
 	}
+	
 	
 }

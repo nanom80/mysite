@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mysite.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
+        
+        <!-- js -->
+		<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-3.7.1.js"></script>
     </head>
 
     <body>
@@ -21,9 +24,9 @@
             <nav>
                 <ul class="clearfix">
                     <li><a href="">입사지원서</a></li>
-                    <li><a href="${pageContext.request.contextPath}/board/list">게시판</a></li>
+                    <li><a href="${pageContext.request.contextPath}/board/list3">게시판</a></li>
                     <li><a href="">갤러리</a></li>
-                    <li><a href="">방명록</a></li>
+                    <li><a href="${pageContext.request.contextPath}/guestbook/addlist">방명록</a></li>
                 </ul>
             </nav>
             <div class="content clearfix">

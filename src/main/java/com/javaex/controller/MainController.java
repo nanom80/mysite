@@ -13,6 +13,9 @@ public class MainController {
 	 * 3.세션 : 리스트페이징+검색
 	 * 4.js
 	 * 
+	 * 
+	 * 계층형 게시판 만들기
+	 * 
 	 */
 	
 	//필드

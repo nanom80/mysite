@@ -1,6 +1,7 @@
 package com.javaex.vo;
 
 public class UserVO {
+
 	//필드
 	private int no;
 	private String id;
@@ -8,15 +9,9 @@ public class UserVO {
 	private String name;
 	private String gender;
 	
+	
 	//생성자
 	public UserVO() {}
-	
-	public UserVO(String id, String password, String name, String gender) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-	}
 	
 	public UserVO(int no, String id, String password, String name, String gender) {
 		this.no = no;
@@ -25,7 +20,7 @@ public class UserVO {
 		this.name = name;
 		this.gender = gender;
 	}
-	
+
 	//메소드gs
 	public int getNo() {
 		return no;
@@ -66,11 +61,12 @@ public class UserVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	//메소드일반
+
+	//메소드 일반
 	@Override
 	public String toString() {
-		return "UserVO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", gender=" + gender + "]";
+		return "UserVO [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", gender=" + gender
+				+ "]";
 	}
-	
+
 }

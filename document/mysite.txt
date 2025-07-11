@@ -7,6 +7,9 @@ http://localhost:8888/user/joinform
 회원가입
 http://localhost:8888/user/join?id=111&password=111&name=유재석&gender=남
 
+아이디사용가능체크
+http://localhost:8888/user/idcheck?id=aaa
+
 로그인폼
 http://localhost:8888/user/loginform
 
@@ -16,17 +19,24 @@ http://localhost:8888/user/login?id=111&password=111
 로그아웃
 http://localhost:8888/user/logout
 
+
 방명록폼
 http://localhost:8888/guestbook/addlist
 
+ajax 방명록
+http://localhost:8888/ajaxguestbook/index
+
 방명록작성
 http://localhost:8888/guestbook/addlistWrite?id=111&name=111&password=111&content=111
+
 
 수정폼
 http://localhost:8888/user/editform
 
 수정
 http://localhost:8888/user/edit?name=111&password=111&content=111
+
+
 
 게시판
 http://localhost:8888/board/list
@@ -35,6 +45,7 @@ http://localhost:8888/board/list2?crtPage=2
 게시판 검색
 http://localhost:8888/board/list3?kwd=12
 http://localhost:8888/board/list2?crtPage=2&kwd=12
+
 
 
 

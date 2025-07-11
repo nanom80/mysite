@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mysite.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/board.css">
+        
+        <!-- js -->
+		<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-3.7.1.js"></script>
     </head>
 
     <body>

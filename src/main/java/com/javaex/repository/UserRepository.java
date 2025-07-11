@@ -13,29 +13,58 @@ public class UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//생성자
-	
-	//메소드gs
-	
-	//입력
+	//메소드일반
+	//--user저장(회원가입)
 	public int userInsert(UserVO userVO) {
-		
 		System.out.println("UserRepository.userInsert()");
 		
-		int count = sqlSession.insert("mysite.insert", userVO);
+		int count = sqlSession.insert("user.insert", userVO);
 		
 		return count;
 	}
 	
-	//조회
+	
+	//--user정보가져오기(id password) -->세션저장용
 	public UserVO userSelectOneByIdPw(UserVO userVO) {
-		
 		System.out.println("UserRepository.userSelectOneByIdPw()");
-		System.out.println(userVO);
 		
-		UserVO authUser = sqlSession.selectOne("mysite.select", userVO);
+		//System.out.println(userVO);  //id pw   0x999
 		
+		UserVO authUser = sqlSession.selectOne("user.selectOneByIdPw", userVO);  
+		
+		//System.out.println(authUser); //다 들어있다  0x567
+
 		return authUser;
+		
+	}
+	
+	//--user정보가져오기(no) -->회원수정폼
+	public UserVO userSelectByNo(int no) {
+		System.out.println("UserRepository.userSelectByNo()");
+		
+		UserVO userVO = sqlSession.selectOne("user.selectByNo", no);
+		
+		return userVO;
+		
+	}
+	
+	
+	//--회원정보수정
+	public int userUpdate(UserVO userVO) {
+		System.out.println("UserRepository.userUpdate()");
+		
+		int count = sqlSession.update("user.update", userVO);
+		
+		return count;
+	}
+	
+	
+	//--아이디사용유무체크(회원가입)
+	public UserVO userSelectById(String id) {
+		System.out.println("UserRepository.userSelectById()");
+		
+		UserVO userVO = sqlSession.selectOne("user.selectOneById", id);
+		return userVO;
 	}
 	
 	//방명록쓰기
@@ -48,27 +77,6 @@ public class UserRepository {
 		return count;
 	}
 	
-	//user정보가져오기(no) 회원수정폼
-	public UserVO userSelectByNo(int no) {
-		System.out.println("UserRepository.selectOneByNo()");
-		
-		UserVO userVO = sqlSession.selectOne("mysite.selectOneByNo", no);
-		
-		return userVO;
-		
-	}
-	
-	//회원수정
-	public int userUpdate(UserVO userVO) {
-		System.out.println("UserRepository.userUpdate()");
-		
-		System.out.println(userVO);
-		
-		int count = sqlSession.update("mysite.update", userVO);
-		System.out.println(count);
-		
-		return 0;
-	}
 	
 	
 }

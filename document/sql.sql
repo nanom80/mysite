@@ -50,11 +50,20 @@ create table guestbook(
 
 alter table guestbook modify content varchar(1000);
 
+alter table guestbook add column reg_date datetime not null;
+
+ALTER TABLE guestbook ADD COLUMN reg_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
 drop table guestbook;
 
 select * from guestbook;
 
 insert into guestbook values (null,'111','111','111','111');
+
+
+select * FROM guestbook;
+
+
 
 
 
@@ -99,7 +108,12 @@ select count(*) cnt
 from board
 ;
 
-
+select *
+from board
+where title like '%12%'
+order by no
+limit 0,10
+;
 
 
 
