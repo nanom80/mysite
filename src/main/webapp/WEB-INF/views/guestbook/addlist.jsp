@@ -26,7 +26,7 @@
                     <li><a href="">입사지원서</a></li>
                     <li><a href="${pageContext.request.contextPath}/board/list3">게시판</a></li>
                     <li><a href="">갤러리</a></li>
-                    <li><a href="${pageContext.request.contextPath}/guestbook/addlist">방명록</a></li>
+                    <li><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
                 </ul>
             </nav>
 
@@ -34,7 +34,7 @@
                 <aside>
                     <h2>방명록</h2>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/guestbook/addlist">일반방명록</a></li>
+                        <li><a href="${pageContext.request.contextPath}/guestbook">일반방명록</a></li>
                         <li><a href="${pageContext.request.contextPath}/ajaxguestbook/index">ajax방명록</a></li>
                     </ul>
                 </aside>
@@ -50,7 +50,7 @@
                     </div>
 
                     <div id="guestbook-addlist">
-                    	<form class="form-box" action="${pageContext.request.contextPath}/guestbook/addlistWrite" method="get">
+                    	<form class="form-box" action="${pageContext.request.contextPath}/guestbook" method="get">
                             <table>
                                 <colgroup>
                                     <col style="width: 70px;">

@@ -23,7 +23,7 @@
 	<insert id="insert" parameterType="com.javaex.vo.GuestbookVO">
 		<![CDATA[    
 			insert into guestbook
-			values(null, #{name}, #{password}, #{content}, now())
+			values(null, #{id}, #{name}, #{password}, #{content}, now())
 		]]>
 	</insert>
 	
@@ -44,7 +44,7 @@
 	<insert id="insertkey" parameterType="com.javaex.vo.GuestbookVO">
 		<![CDATA[    
 			insert into guestbook
-			values(null, #{name}, #{password}, #{content}, now())
+			values(null, #{id}, #{name}, #{password}, #{content}, now())
 		]]>
 		
 		<selectKey keyProperty="no" resultType="int" order="AFTER">	

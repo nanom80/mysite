@@ -22,27 +22,22 @@
             <!-- 해더 + 네비 ------------------------------------>
 		
             <div class="content2 clearfix">
-                <aside>
-                    <h2>방명록</h2>
-                    <ul>
-                        <li><a href="${pageContext.request.contextPath}/guestbook">일반방명록</a></li>
-                        <li><a href="">ajax방명록</a></li>
-                    </ul>
-                </aside>
-
+            	<!-- 방명록 aside -->
+ 				<c:import url="/WEB-INF/views/include/asideGuestbook.jsp"></c:import>
+				<!-- /방명록 aside -->
 				<main>
 					
 				    <div class="main-head clearfix">
-                        <h3>일반방명록</h3>
+                        <h3>ajax방명록</h3>
                         <ol class="clearfix">
                             <li>홈</li>
                             <li>방명록</li>
-                            <li>일반방명록</li>
+                            <li>ajax방명록</li>
                         </ol>
                     </div>
 
 					<div id="guestbook-addlist">
-						<form id="formAdd" class="form-box" action="" method="get">
+						<form id="formAdd" class="form-box" action="" method="">
 							<table>
 								<colgroup>
 									<col style="width: 70px;">
@@ -141,6 +136,7 @@ $(document).ready(function(){
 	
 	//등록버튼을 클릭했을때
 	$('#formAdd').on('submit', function(event){
+		
 		console.log('등록버튼클릭');
 		event.preventDefault();
 		
@@ -160,22 +156,31 @@ $(document).ready(function(){
 		//서버에 저장 요청
 		$.ajax({
 			
-			url : '${pageContext.request.contextPath }/api/guestbook/add',		
+			url : '${pageContext.request.contextPath }/api/guestbooks',		
 			type : 'post',
 			//contentType : "application/json",
 			data : guestbookVO,
 			
 			dataType : 'json',
-			success : function(guestbookVO){
+			success : function(jsonResult){
 				/*성공시 처리해야될 코드 작성*/
+				console.log(jsonResult);
+				console.log(jsonResult.result);
+				console.log(jsonResult.apiData);
 				
-				/* 화면에 그리기 */
-				render(guestbookVO, 'up');
+				if(jsonResult.result == 'success'){
+					/* 화면에 그리기 */
+					render(jsonResult.apiData, 'up');
+					
+					/* 입력폼 비우기 */
+					$('#txt-name').val('');
+					$('#txt-password').val('');
+					$('#text-content').val('')
+				}else {
+					console.log('등록 실패');
+				}
 				
-				/* 입력폼 비우기 */
-				$('#txt-name').val('');
-				$('#txt-password').val('');
-				$('#text-content').val('')
+				
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
@@ -225,30 +230,30 @@ $(document).ready(function(){
 		let no = $('#modalForm input[name="no"]').val();
 		
 		let guestbookVO = {
-			no: no,
 			password: pw
 		};
 		
 		//전송
 		$.ajax({
 			
-			url : '${pageContext.request.contextPath}/api/guestbook/remove',		
-			type : 'post',
+			url : '${pageContext.request.contextPath}/api/guestbooks/'+no,		
+			type : 'delete',
 			//contentType : 'application/json',
 			data : guestbookVO,
 
 			dataType : 'json',
-			success : function(result){
+			success : function(jsonResult){
 			    /*성공시 처리해야될 코드 작성*/
-			    console.log(result);
+			    console.log(jsonResult);
+			    console.log(jsonResult.result);
 			    
-			    if(result == 1){    
-				    //리스트에서 선택한거 화면에서 지우기
+			    if(jsonResult.result == 'success'){
+			    	//리스트에서 선택한거 화면에서 지우기
 				    $('#t'+no).remove();   //아이디를 매칭시킨다
+			    }else {
+			    	//모달창 닫기
+				    $('.modal-bg').removeClass('active');
 			    }
-			    
-			  	//모달창 닫기
-			    $('.modal-bg').removeClass('active');
 			    
 			},
 			error : function(XHR, status, error) {
@@ -267,19 +272,26 @@ $(document).ready(function(){
 //리스트데이타요청해서 그리는 함수
 function fetchList(){
 	$.ajax({
-		url : "${pageContext.request.contextPath}/api/guestbook/list",
-		type : "post",
+		url : "${pageContext.request.contextPath}/api/guestbooks",
+		/*rl : "https://raw.githubusercontent.com/clz2025-red/api/refs/heads/main/guestbook",*/
+		type : "get",
 		//contentType : "application/json",
 		//data : {name: ”홍길동"},
 		
 		dataType : "json",
-		success : function(guestbookList){
+		success : function(jsonResult){
 			/*성공시 처리해야될 코드 작성*/
-			//console.log(guestbookList);
+			console.log(jsonResult);
+			console.log(jsonResult.result);
+			console.log(jsonResult.apiData);
 			
-			//화면에 그린다
-			for(let i=0; i<guestbookList.length; i++){
-				render(guestbookList[i], 'down');
+			if(jsonResult.result == 'success'){
+				//화면에 그린다
+				for(let i=0; i<jsonResult.apiData.length; i++){
+					render(jsonResult.apiData[i], 'down');
+				}
+			}else {
+				console.log('알 수 없는 오류');
 			}
 			 
 		},

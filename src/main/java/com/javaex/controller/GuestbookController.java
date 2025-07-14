@@ -35,7 +35,7 @@ public class GuestbookController {
 		
 		model.addAttribute("gList", guestbookList);
 		
-		return "guestbook/addList";
+		return "guestbook/addlist";
 		
 	}
 	
