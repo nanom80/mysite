@@ -56,7 +56,7 @@ ALTER TABLE guestbook ADD COLUMN reg_date DATETIME NOT NULL DEFAULT CURRENT_TIME
 
 drop table guestbook;
 
-select * from guestbook;
+select * from guestbook; where no = 1;
 
 insert into guestbook values (null,'111','111','111','111');
 
@@ -64,7 +64,8 @@ insert into guestbook values (null,'111','111','111','111');
 select * FROM guestbook;
 
 
-
+select  *
+from    
 
 
 create table board(

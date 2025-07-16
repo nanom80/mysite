@@ -5,6 +5,6 @@
     <h2>방명록</h2>
     <ul>
         <li><a href="${pageContext.request.contextPath}/guestbook">일반방명록</a></li>
-        <li><a href="${pageContext.request.contextPath}/ajaxguestbook">ajax방명록</a></li>
+        <li><a href="${pageContext.request.contextPath}/ajaxguestbook/index">ajax방명록</a></li>
     </ul>
 </aside>

@@ -32,6 +32,7 @@ public class MainController {
 		return "main/index";
 	}
 	
+	/*
 	@RequestMapping(value="/{id}", method= {RequestMethod.GET, RequestMethod.POST})
 	public String index(@PathVariable String id) {
 		System.out.println("MainController.index()");
@@ -49,4 +50,5 @@ public class MainController {
 		
 		return "main/index";
 	}
+	*/
 }

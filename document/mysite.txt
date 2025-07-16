@@ -46,7 +46,10 @@ http://localhost:8888/board/list2?crtPage=2
 http://localhost:8888/board/list3?kwd=12
 http://localhost:8888/board/list2?crtPage=2&kwd=12
 
+첨부파일
+http://localhost:8888/attach/form
 
-
+갤러리
+http://localhost:8888/gallery
 
 

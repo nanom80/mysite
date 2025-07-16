@@ -21,16 +21,7 @@
             <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
             <!-- 해더 + 네비 ------------------------------------>
 			
-			<nav>
-                <ul class="clearfix">
-                    <li><a href="">입사지원서</a></li>
-                    <li><a href="${pageContext.request.contextPath}/board/list3">게시판</a></li>
-                    <li><a href="">갤러리</a></li>
-                    <li><a href="${pageContext.request.contextPath}/guestbook/addlist">방명록</a></li>
-                </ul>
-            </nav>
-            
-            <div class="content2 clearfix">
+			<div class="content2 clearfix">
                 <aside>
                     <h2>유저</h2>
                     <ul>
