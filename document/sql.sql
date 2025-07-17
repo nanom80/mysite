@@ -166,6 +166,6 @@ SELECT * FROM book;
 SELECT * FROM web_db.book;
 
 
-
+select * from gallery;
 
 

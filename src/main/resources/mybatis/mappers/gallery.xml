@@ -30,7 +30,7 @@
 	    ]]>
     </select>
     
-    <!-- 삭제: 작성자만 삭제 가능 -->
+    <!-- 삭제: 작성자만 삭제 가능해야함 -->
     <delete id="delete" parameterType="map">
     	<![CDATA[
         DELETE FROM gallery WHERE no = #{no} AND user_no = #{user_no}

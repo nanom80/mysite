@@ -101,8 +101,18 @@ public class AttachService {
 	}
 	
 	//삭제
+    /* repository에서 hash맵을 쓰도록 해봄
     public boolean deleteImage(int no, int user_no) {
         return galleryRepository.delete(no, user_no) > 0;
+    }
+    */
+    
+	//repository에서 hash맵을 안쓰도록 해봄
+    public boolean deleteImage(int no, int user_no) {
+        GalleryVO galleryVO = new GalleryVO();
+        galleryVO.setNo(no);
+        galleryVO.setUser_no(user_no);
+        return galleryRepository.delete(galleryVO) > 0;
     }
 
 }

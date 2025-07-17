@@ -19,15 +19,21 @@ public class GalleryRepository {
     public List<GalleryVO> selectList() {
         return sqlSession.selectList("gallery.selectList");
     }
-
-    public int insert(GalleryVO vo) {
-        return sqlSession.insert("gallery.insert", vo);
+    
+    public int insert(GalleryVO galleryVO) {
+        return sqlSession.insert("gallery.insert", galleryVO);
     }
-
+    
+    //hashMap
     public int delete(int no, int user_no) {
         Map<String, Object> map = new HashMap<>();
         map.put("no", no);
         map.put("user_no", user_no);
         return sqlSession.delete("gallery.delete", map);
     }
+    
+    public int delete(GalleryVO galleryVO) {
+    	return sqlSession.delete("gallery.delete", galleryVO);
+    }
+    
 }

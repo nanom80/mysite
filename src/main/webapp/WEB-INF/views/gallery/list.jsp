@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -71,6 +72,7 @@
     </footer>
 </div>
 
+
 <!-- 업로드 모달 -->
 <div id="modal-upload" class="modal-bg">
     <div class="modal-content">
@@ -85,7 +87,7 @@
             </div>
             <div class="info-row">
                 <label for="txt-file">이미지선택</label>
-                <input type="file" name="file" value="">
+                <input id="txt-file" type="file" name="file" value="">
             </div>
             <div class="btn-box">
                 <button type="submit" class="btn-del btn btn-blue btn-md">등록</button>
@@ -107,8 +109,6 @@
             <div class="img-content" id="modal-view-content">
             여기는 입력한 코멘트가 나옵니다.
             </div>
-            <div id="modal-user-no"></div>
-            <div>authUser.no: ${authUser.no} / img.user_no: ${modalUserNo}</div>
             <input type="hidden" id="auth-user-no" value="${authUser.no}">
             <button id="modal-del-btn" class="btn-del" style="float:right; display:none;">삭제</button>
         </div>
@@ -148,20 +148,22 @@ document.addEventListener("DOMContentLoaded", function() {
     var btnCloseView = modalView ? modalView.querySelector('.btn-close') : null;
     var modalViewImg = document.getElementById('modal-view-img');
     var modalViewContent = document.getElementById('modal-view-content');
-    var modalUserNo = document.getElementById('modal-user-no');
     var galleryImgs = document.querySelectorAll('.gallery-img');
     var authUserNo = document.getElementById('auth-user-no')?.value;
     var delBtn = document.getElementById('modal-del-btn');
+    var currentImgNo = null;
     
     galleryImgs.forEach(function(img) {
         img.addEventListener('click', function() {
             var userNo = img.getAttribute('data-user-no');
             var content = img.getAttribute('data-content');
             var src = img.getAttribute('data-src');
+            var imgNo = img.getAttribute('data-no');
             
             modalViewImg.src = src;
             modalViewContent.textContent = content;
             modalView.classList.add('active');
+            currentImgNo = imgNo;
             
             // 삭제버튼 표시 여부 결정
             if (authUserNo && userNo && String(authUserNo) == String(userNo)) {
@@ -185,7 +187,35 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    
+ 	//삭제버튼 클릭
+    if (delBtn) {
+	    delBtn.addEventListener('click', function(e) {
+	        e.preventDefault();
+	        
+	        if (!confirm("정말 삭제하시겠습니까?")) {
+	            return;
+	        }
+	        
+	        console.log("삭제 버튼 클릭됨, currentImgNo:", currentImgNo);
+	        
+	        const formData = new FormData();
+	        formData.append("no", currentImgNo);
+	
+	        fetch("/gallery/delete", {
+	            method: "POST",
+	            body: formData
+	        })
+	        .then(response => response.json())
+	        .then(result => {
+	            if (result === true) {
+	                alert("삭제되었습니다.");
+	                location.reload();
+	            } else {
+	                alert("삭제 실패!");
+	            }
+            })
+	    });
+	}
 });
 </script>
 </body>
