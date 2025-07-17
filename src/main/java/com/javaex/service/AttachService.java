@@ -4,14 +4,15 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.javaex.repository.FileRepository;
-import com.javaex.vo.FileVO;
+import com.javaex.repository.GalleryRepository;
+import com.javaex.vo.GalleryVO;
 import com.javaex.vo.UserVO;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,17 +21,22 @@ import jakarta.servlet.http.HttpSession;
 public class AttachService {
 	//필드
 	@Autowired
-    private FileRepository fileRepository;
+    private GalleryRepository galleryRepository;
 	private HttpSession session;
 	//생성자
 	//메소드gs
 	//메소드일반
-	public String exeUpload(MultipartFile file) {
+	
+	//리스트
+    public List<GalleryVO> getGalleryList() {
+        return galleryRepository.selectList();
+    }
+	
+    //저장
+	public String uploadImage(MultipartFile file, String content, UserVO user) {
 		System.out.println("AttachService.exeUpload()");
 		
 		String saveDir = "C:\\javaStudy\\upload\\";
-		
-		System.out.println(file.getOriginalFilename());
 		
 		//(1)파일정보를 추출, 저장(DB)
 		//오리지날 파일명
@@ -50,28 +56,31 @@ public class AttachService {
 		
 		//파일경로
 		String filePath = saveDir + saveName;
+		
 		System.out.println(filePath);
 		
 		//파일사이즈
 		long fileSize = file.getSize();
 		System.out.println(fileSize);
 		
+		System.out.println(file.getOriginalFilename());
+		
 		//UserVO authUser = (UserVO) session.getAttribute("authUser");
 		//int userNo = authUser.getNo();
 		
 		//vo에 묶는다
-		FileVO fileVO = new FileVO();
-		fileVO.setUserNo(1);
-        fileVO.setOrgName(orgName);
-        fileVO.setExName(exName);
-        fileVO.setSaveName(saveName);
-        fileVO.setFilePath(filePath);
-        fileVO.setFileSize(fileSize);
+		GalleryVO galleryVO = new GalleryVO();
+		galleryVO.setUser_no(user.getNo());
+		galleryVO.setContent(content);
+		galleryVO.setFilePath(filePath);
+		galleryVO.setOrgName(orgName);
+		galleryVO.setSaveName(saveName);
+		galleryVO.setFileSize(fileSize);
         
-		System.out.println(fileVO);
+		System.out.println(galleryVO);
 		
 		//db저장
-		fileRepository.insertFile(fileVO);
+		galleryRepository.insert(galleryVO);
 		
 		//(2)실물파일을 하드디스크에 저장
 		try {
@@ -90,5 +99,10 @@ public class AttachService {
 		return saveName;
 		
 	}
+	
+	//삭제
+    public boolean deleteImage(int no, int user_no) {
+        return galleryRepository.delete(no, user_no) > 0;
+    }
 
 }
