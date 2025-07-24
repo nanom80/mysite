@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.javaex.service.GuestbookService;
 import com.javaex.util.JsonResult;
 import com.javaex.vo.GuestbookVO;
+import com.javaex.vo.UserVO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class GuestbookApiController {
@@ -45,8 +48,16 @@ public class GuestbookApiController {
 		@ResponseBody
 		@PostMapping(value="/api/guestbooks")
 		//@RequestMapping(value="/api/guestbooks", method= RequestMethod.POST)
+		//public JsonResult add(@ModelAttribute GuestbookVO guestbookVO, HttpSession session) {
 		public JsonResult add(@ModelAttribute GuestbookVO guestbookVO) {
 			System.out.println("GuestbookApiController.add()");
+			
+			/*
+			UserVO authUser = (UserVO) session.getAttribute("authUser");
+			if (authUser != null) {
+				guestbookVO.setId(authUser.getId());  // 또는 getId(), getUserNo() 등 실제 UserVo 필드명에 따라
+		    }
+			*/
 			
 			//guestbookVO(3) --> gVO(4, 출력용)
 			GuestbookVO gVO= guestbookService.exeGuestbookAddKey(guestbookVO);

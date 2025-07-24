@@ -1,55 +1,69 @@
 메인
 http://localhost:8888
+http://13.125.206.63:8080/
 
 회원가입폼
 http://localhost:8888/user/joinform
+http://13.125.206.63:8080/user/joinform
 
 회원가입
 http://localhost:8888/user/join?id=111&password=111&name=유재석&gender=남
+http://13.125.206.63:8080/user/join?id=111&password=111&name=유재석&gender=남
 
 아이디사용가능체크
 http://localhost:8888/user/idcheck?id=aaa
+http://13.125.206.63:8080/user/idcheck?id=aaa
 
 로그인폼
 http://localhost:8888/user/loginform
+http://13.125.206.63:8080/user/loginform
 
 로그인
 http://localhost:8888/user/login?id=111&password=111
+http://13.125.206.63:8080/user/login?id=111&password=111
 
 로그아웃
 http://localhost:8888/user/logout
-
+http://13.125.206.63:8080/user/logout
 
 방명록폼
 http://localhost:8888/guestbook/addlist
+http://13.125.206.63:8080/guestbook/addlist
 
 ajax 방명록
 http://localhost:8888/ajaxguestbook/index
+http://13.125.206.63:8080/ajaxguestbook/index
 
 방명록작성
 http://localhost:8888/guestbook/addlistWrite?id=111&name=111&password=111&content=111
-
+http://13.125.206.63:8080/guestbook/addlistWrite?id=111&name=111&password=111&content=111
 
 수정폼
 http://localhost:8888/user/editform
+http://13.125.206.63:8080/user/editform
 
 수정
 http://localhost:8888/user/edit?name=111&password=111&content=111
-
-
+http://13.125.206.63:8080/user/edit?name=111&password=111&content=111
 
 게시판
 http://localhost:8888/board/list
 http://localhost:8888/board/list2?crtPage=2
+http://13.125.206.63:8080/board/list
+http://13.125.206.63:8080/board/list2?crtPage=2
 
 게시판 검색
 http://localhost:8888/board/list3?kwd=12
 http://localhost:8888/board/list2?crtPage=2&kwd=12
+http://13.125.206.63:8080/board/list3?kwd=12
+http://13.125.206.63:8080/board/list2?crtPage=2&kwd=12
 
 첨부파일
 http://localhost:8888/attach/form
+http://13.125.206.63:8080/attach/form
 
 갤러리
 http://localhost:8888/gallery
+http://13.125.206.63:8080/gallery
 
 

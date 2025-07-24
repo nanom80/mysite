@@ -36,7 +36,16 @@ public class AttachService {
 	public String uploadImage(MultipartFile file, String content, UserVO user) {
 		System.out.println("AttachService.exeUpload()");
 		
-		String saveDir = "C:\\javaStudy\\upload\\";
+		String osName = System.getProperty("os.name");
+		
+		String saveDir = "";
+			
+		if(osName.contains("win")) {
+			System.out.println("win");
+			saveDir = "C:\\javaStudy\\upload\\";
+		} else {
+			saveDir = "/data/upload/";
+		}
 		
 		//(1)파일정보를 추출, 저장(DB)
 		//오리지날 파일명

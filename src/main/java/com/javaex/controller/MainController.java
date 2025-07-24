@@ -25,6 +25,7 @@ public class MainController {
 	
 	//메소드일반
 	//사이트 시작 페이지 http://localhost:8888/
+	//http://13.125.206.63:8080/
 	@RequestMapping(value="", method= {RequestMethod.GET, RequestMethod.POST})
 	public String index() {
 		System.out.println("MainController.index()");

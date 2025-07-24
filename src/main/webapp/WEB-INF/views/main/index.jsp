@@ -16,7 +16,9 @@
     </head>
 
     <body>
-        <div class="wrap">
+    	v01
+    	<div class="wrap">
+    		
         	<!-- header -->
             <c:import url="/WEB-INF/views/include/header.jsp">
             </c:import>

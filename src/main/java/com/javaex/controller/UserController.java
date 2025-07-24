@@ -102,7 +102,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(@ModelAttribute UserVO userVO, HttpSession session) {
 		System.out.println("UserController.login()");
-
+		System.out.println(userVO);
 		UserVO authUser = userService.exeLogin(userVO);
 		System.out.println(authUser);
 

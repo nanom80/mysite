@@ -22,11 +22,10 @@
 	<!-- 방명록저장 -->
 	<insert id="insert" parameterType="com.javaex.vo.GuestbookVO">
 		<![CDATA[    
-			insert into guestbook
+			insert into guestbook (no, id, name, password, content, reg_date)
 			values(null, #{id}, #{name}, #{password}, #{content}, now())
 		]]>
 	</insert>
-	
 	
 	
 	<!-- 방명록삭제 -->
