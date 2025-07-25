@@ -215,5 +215,12 @@ public class BoardService {
 		return pMap;
 	}
 	
-	
+	//# 게시글 작성
+	public int exeBoardWrite(BoardVO boardvo) {
+		System.out.println("BoardService.exeBoardWrite()");
+		
+		int count = boardRepository.boardInsert(boardvo);
+		
+		return count;
+	}
 }

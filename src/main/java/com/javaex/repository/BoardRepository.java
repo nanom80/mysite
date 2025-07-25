@@ -65,5 +65,14 @@ public class BoardRepository {
 		return totalCount;
 	}
 	
+	//# 게시글 작성
+	public int boardInsert(BoardVO boardvo) {
+		System.out.println("BoardRepository.boardInsert()");
+		
+		int count = sqlSession.insert("board.insertBoard", boardvo);
+		
+		return 0;
+	}
+	
 	
 }

@@ -61,7 +61,13 @@
 		]]>
 	</select>
 	
-	
+	<!-- 게시글 작성 -->
+	<insert id="insertBoard">
+		<![CDATA[
+			insert into board
+        	values(null, #{userNo}, #{title}, #{content}, 0, now())
+		]]>
+	</insert>
 	
 	<!-- 전체글갯수 구하기 (페이징)-->
 	<select id="selectTotalCount" resultType="int">

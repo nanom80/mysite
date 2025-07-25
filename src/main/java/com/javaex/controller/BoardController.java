@@ -6,12 +6,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVO;
+import com.javaex.vo.UserVO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value="/board")
@@ -84,6 +88,50 @@ public class BoardController {
 		
 		return "board/list3";
 		
+	}
+	
+	//게시판 글 쓰기(writeform)
+	@RequestMapping(value="/writeform", method = {RequestMethod.GET, RequestMethod.POST})
+	public String writeForm() {
+		System.out.println("BoardController.writeForm()");
+		
+		
+		
+		return "board/writeform";
+	}
+	
+	//게시판 글 쓰기(write)
+	/*
+	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
+	public String write(@ModelAttribute BoardVO boardvo, HttpSession session) {
+		System.out.println("BoardController.write()");
+		
+		int userNo = ((UserVO)session.getAttribute("authuser")).getNo();
+		System.out.println(userNo);
+		
+		boardvo.setNo(userNo);
+		System.out.println(boardvo);
+		
+		boardService.exeBoardWrite(boardvo);
+		
+		return "board/list";
+	}
+	*/
+	
+	
+	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
+	public String write(@ModelAttribute BoardVO boardVO, HttpSession session) {
+		System.out.println("BoardController.write()");
+
+		UserVO authUser = (UserVO) session.getAttribute("authUser");
+
+		boardVO.setUserNo(authUser.getNo());
+
+		int count = boardService.exeBoardWrite(boardVO);
+		System.out.println(boardVO);
+
+		//return "redirect:list";
+		return "redirect:/board/list3?crtPage=1";
 	}
 	
 	
