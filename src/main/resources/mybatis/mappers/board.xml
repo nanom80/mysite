@@ -16,7 +16,7 @@
 			        u.name userName
 			from users u, board b
 			where u.no = b.user_no
-			order by b.no asc
+			order by b.no desc
 		]]>
 	</select>
 	
@@ -32,7 +32,7 @@
 					u.name userName
 			from users u, board b
 			where u.no = b.user_no
-			order by b.no asc
+			order by b.no desc
 			limit #{startRowNo}, #{listCnt}
 		]]>
 	</select>
@@ -56,7 +56,7 @@
 			and title like concat('%', #{kwd}, '%')
 		</if>
 		<![CDATA[   
-			order by b.no asc
+			order by b.no desc
 			limit #{startRowNo}, #{listCnt}
 		]]>
 	</select>
@@ -85,5 +85,32 @@
 			where title like concat('%', #{kwd}, '%')
 		]]>
 	</select>
+	
+	<!-- 선택한 글 내용 가져오기 -->
+	<select id="selectListOne" parameterType="int" resultType="com.javaex.vo.BoardVO">
+			<![CDATA[
+				select b.no
+				    , b.title
+					, b.content
+					, b.hit
+					, b.reg_date regDate
+					, u.no userNo
+					, u.name userName
+				from board b
+					, users u
+				where b.user_no = u.no
+				and b.no = #{no}
+			]]>
+	</select>
+	
+	<!-- 글삭제 -->
+	<delete id="delete" parameterType="com.javaex.vo.BoardVO">
+			<![CDATA[
+				delete from  board
+				where user_no = #{userNo}
+				and no = #{no}
+			]]>
+	</delete>
+	
 	
 </mapper>

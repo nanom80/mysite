@@ -223,4 +223,23 @@ public class BoardService {
 		
 		return count;
 	}
+
+	//선택한 글 데이터 불러오기/수정데이터 불러오기
+	public BoardVO exeRead(int no){
+		System.out.println("BoardService.exeRead()");
+		
+		BoardVO boardVO = boardRepository.selectListOne(no);
+		
+		return boardVO;
+	}
+	
+	//글삭제
+	public int exeRemove(BoardVO boardVO) {
+		System.out.println("BoardService.exeRemove()");
+		
+		int count  = boardRepository.deleteBoard(boardVO);
+		
+		return count;
+	}
+	
 }

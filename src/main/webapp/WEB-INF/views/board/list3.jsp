@@ -22,7 +22,7 @@
                 <aside>
                     <h2>게시판</h2>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/board">일반게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/board/list3">일반게시판</a></li>
                         <li><a href="">댓글게시판</a></li>
                     </ul>
                 </aside>
@@ -68,12 +68,17 @@
 								<c:forEach items="${requestScope.pMap.boardList}"  var="boardVO">
 									<tr>
 										<td>${boardVO.no}</td>
-										<td class="txt-left"><a href="#">${boardVO.title}</a></td>
+										<td class="txt-left"><a href="${pageContext.request.contextPath}/board/read?no=${boardVO.no}">${boardVO.title}</a></td>
 										<td>${boardVO.userName}</td>
 										<td>${boardVO.hit}</td>
 										<td>${boardVO.regDate}</td>
 										<td>
-	                                        <button class="btn btn-white btn-sm" type="button">삭제</button>
+	                                        <!-- 세션에 값이 있을때 -->
+											<c:if test="${boardVO.userNo==sessionScope.authUser.no}">
+												<button class="btn btn-white btn-sm" type="button">
+													<a href="${pageContext.request.contextPath}/board/remove?no=${boardVO.no}">삭제</a>
+												</button>
+											</c:if>
 	                                    </td>
 									</tr>
 								

@@ -74,5 +74,26 @@ public class BoardRepository {
 		return 0;
 	}
 	
+	//선택한 글 데이터 불러오기
+	public BoardVO selectListOne(int no){
+		System.out.println("BoardRepository.selectListOne()");
+		
+		System.out.println(no);
+		BoardVO boardVO = sqlSession.selectOne("board.selectListOne", no);
+		
+		return boardVO;
+	}
+	
+	//글삭제
+	public int deleteBoard(BoardVO boardVO) {
+		System.out.println("deleteBoard.deleteBoard()");
+		
+		int count  = sqlSession.delete("board.delete",boardVO);
+		
+		return count;
+	}
+	
+	
+	
 	
 }

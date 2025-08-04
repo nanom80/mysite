@@ -27,7 +27,7 @@
             
             <div class="content2 clearfix">
                 <aside>
-                    <h2>유저</h2>
+                    <h2>회원</h2>
                     <ul>
                         <li><a href="">회원정보</a></li>
                         <li><a href="">로그인</a></li>

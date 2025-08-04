@@ -134,7 +134,29 @@ public class BoardController {
 		return "redirect:/board/list3?crtPage=1";
 	}
 	
+	// 게시판 읽기
+	@RequestMapping(value = "/read", method = { RequestMethod.GET, RequestMethod.POST })
+	public String read(@RequestParam(value = "no") int no, Model model) {
+		System.out.println("BoardController.read()");
+
+		BoardVO boardVO = boardService.exeRead(no);
+		model.addAttribute("boardVO", boardVO);
+
+		return "board/read";
+	}
 	
-	
+	// 글삭제
+	@RequestMapping(value = "/remove", method = { RequestMethod.GET, RequestMethod.POST })
+	public String remove(@ModelAttribute BoardVO boardVO, HttpSession session) {
+		System.out.println("BoardController.remove()");
+
+		UserVO authUser = (UserVO) session.getAttribute("authUser");
+
+		boardVO.setUserNo(authUser.getNo());
+
+		int count = boardService.exeRemove(boardVO);
+
+		return "redirect:list3";
+	}
 
 }
